@@ -4,7 +4,7 @@ use std::fmt;
 pub struct Cpu {
     pub pc: u16,
     cycle: u32,
-    mem: Box<Io>,
+    mem: Box<dyn Io>,
     regs: Regs,
     ime: bool,
 }
@@ -18,7 +18,7 @@ impl fmt::Debug for Cpu {
     }
 }
 impl Cpu {
-    pub fn new(mem: Mem) -> Self {
+    pub fn new(mem: Box<dyn Io>) -> Self {
         Self {
             pc: 0,
             mem,
